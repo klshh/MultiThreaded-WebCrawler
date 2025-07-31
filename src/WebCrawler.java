@@ -22,7 +22,6 @@ public class WebCrawler {
 
         @Override
         public void run() {
-
             List<String> extractedUrls = htmlParserStrategy.getUrls(url);
 
             for(String url : extractedUrls){
@@ -43,7 +42,8 @@ public class WebCrawler {
 
     public List<String> crawl(String startUrl, HtmlParserStrategy htmlParserStrategy) {
         String hostname = startUrl.split("/")[2];
-        this.htmlParserStrategy = new MockHtmlParser();
+        this.htmlParserStrategy = htmlParserStrategy;
+        this.hostName = hostname;
 
         if(hostname.equals(LinkUtils.PARSING_HOST)) {
             visitedUrls.put(startUrl, true);
